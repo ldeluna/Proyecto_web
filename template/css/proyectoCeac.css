@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    font: 10px verdana, geneva, arial, sans-serif;
+    color: #000000;
+    background-color: #FFFFFF;
+    
+}
+
+
+td, th, font {
+    font: 10px verdana, geneva, arial, sans-serif;
+    color: #000000;
+   
+}
+
+/**************************/
+/* estilo de los v�nculos */
+/**************************/
+
+a {
+    font: 10px verdana, geneva, arial, sans-serif;
+    color: #485C98;
+    text-decoration: none;
+}
+
+/* estilo para cuando se pasa el rat�n sobre el v�nculo */
+a:hover {
+    color: #687FC0;
+}
+
+
+.ocultar{
+    display:none;
+}
+
+/*************************************/
+/* mensaje de pie de p�gina */
+/*************************************/
+
+.pie {
+	background-color: #ffffff;
+    color: #000000;
+    font: 9px verdana, geneva, arial, sans-serif;
+}
+
+
+
+/*************************************/
+/* mensaje de error en pie de página */
+/*************************************/
+
+.error {
+    padding-top: 3px;
+    color: red;
+    font-weight: bold;
+    font: 14px verdana, geneva, arial, sans-serif;
+    background-color: BLACK;
+    padding-bottom: 3px;
+}
+
+
+
+ 
+ 

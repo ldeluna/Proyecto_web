@@ -1,0 +1,102 @@
+
+$(document).ready(function(){
+	
+	var timeSlide = 1000;
+	$('#login_username').focus();
+	$('#timer').hide(0);
+	$('#timer').css('display','none');
+	$('#login_userbttn').click(function(){
+		$('#timer').fadeIn(300);
+		$('.box-info, .box-success, .box-alert, .box-error').slideUp(timeSlide);
+		setTimeout(function(){
+			if ( $('#login_username').val() != "" && $('#login_userpass').val() != "" ){
+				
+				$.ajax({
+					type: 'POST',
+					url: 'class/verificarlogin.php',
+					data: 'usuario=' + $('#login_username').val() + '&password=' + $('#login_userpass').val(),
+					success:function(msj){
+						if ( msj == 1 ){
+							$('#alertBoxes').html('<div class="box-success"></div>');
+							$('.box-success').hide(0).html('Espera un momento&#133;');
+							$('.box-success').slideDown(timeSlide);
+							setTimeout(function(){
+								window.location.href = ".";
+							},(timeSlide + 500));
+						}
+						else{
+							$('#alertBoxes').html('<div class="box-error"></div>');
+							$('.box-error').hide(0).html('Lo sentimos, pero los datos son incorrectos: ' + msj);
+							$('.box-error').slideDown(timeSlide);
+						}
+						$('#timer').fadeOut(300);
+					},
+					error:function(){
+						$('#timer').fadeOut(300);
+						$('#alertBoxes').html('<div class="box-error"></div>');
+						$('.box-error').hide(0).html('Ha ocurrido un error durante la ejecuci�n');
+						$('.box-error').slideDown(timeSlide);
+					}
+				});
+				
+			}
+			else{
+				$('#alertBoxes').html('<div class="box-error"></div>');
+				$('.box-error').hide(0).html('Los campos estan vacios');
+				$('.box-error').slideDown(timeSlide);
+				$('#timer').fadeOut(300);
+			}
+		},timeSlide);
+		
+		return false;
+		
+	});
+	
+	
+	
+	$('#sessionKiller').click(function(){
+		$('#timer').fadeIn(300);
+		$('#alertBoxes').html('<div class="box-success"></div>');
+		$('.box-success').hide(0).html('Espera un momento&#133;');
+		$('.box-success').slideDown(timeSlide);
+		setTimeout(function(){
+			window.location.href = "salir.php";
+		},2500);
+	});
+	
+
+                         
+      var consulta;
+             
+      //hacemos focus
+      $("#usuarioregistro").focus();
+                                                 
+      //comprobamos si se pulsa una tecla
+      $("#usuarioregistro").keyup(function(e){
+             //obtenemos el texto introducido en el campo
+             consulta = $("#usuarioregistro").val();
+                                      
+             //hace la b�squeda
+             $("#resultado").delay(1000).queue(function(n) {      
+                                           
+                  $("#resultado").text('cargando');//html('<img src="ajax-loader.gif" />')
+                                           
+                        $.ajax({
+                              type: "POST",
+                              url: "class/comprobar.php",
+                              data: "usuario="+ consulta,
+                              dataType: "html",
+                              error: function(){
+                                    alert("error petici�n ajax");
+                              },
+                              success: function(data){                                                      
+                                    $("#resultado").html(data);
+                                    n();
+                              }
+                  });
+                                           
+             });
+                                
+      });
+                          
+});
